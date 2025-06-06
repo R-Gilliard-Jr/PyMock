@@ -1,0 +1,26 @@
+[project]
+name = "py_mock"
+version = "0.0.1"
+authors = [
+    { name = "Reggie Gilliard Jr."}
+]
+description = "Python package for mocking tabular data."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: Microsoft :: Windows"
+]
+dependencies = [
+    "sphinx", "pandas", "python-dotenv", "pytest", "openpyxl", "mypy"
+]
+
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project.urls]
+Homepage = "https://github.com/HHS/ACF-pir-data"
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
