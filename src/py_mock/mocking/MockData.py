@@ -1,5 +1,7 @@
 """Class for mocking data"""
 
+import os
+
 import numpy as np
 import pandas as pd
 
@@ -10,7 +12,7 @@ class MockData:
     def __init__(self, specs: dict):
         self.__specs = specs
         self.__extension = specs.get("extension")
-        self.__file_name = specs.get("name")
+        self.__file_name = specs.get("file_name")
         self.__data_frames: dict = {}
 
     def generate_rows(self, name: str, metadata: dict[str, dict]):
@@ -44,14 +46,18 @@ class MockData:
         if extension == ".csv":
             for key, value in specs.items():
                 self.generate_rows(file_name, value)
+        # ADD LOGIC FOR EXCEL
+        elif extension in [".xls", ".xlsx"]:
+            pass
 
         return self
 
-    def export(self):
-        pass
+    def export(self, path: str):
+        assert os.path.isdir(path), "Path is not a directory."
 
+        out_path = os.path.join(path, f"{self.__file_name}{self.__extension}")
 
-if __name__ == "__main__":
-    from py_mock.specs.Zip_ZORI_AllHomesPlusMultifamily_Smoothed import METADATA
-
-    MockData(METADATA).generate_data()
+        if self.__extension == ".csv":
+            self.__data_frames.get(self.__file_name).to_csv(out_path)
+        elif self.__extension in [".xls", ".xlsx"]:
+            pass
