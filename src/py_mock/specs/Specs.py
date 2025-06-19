@@ -1,6 +1,5 @@
 import json
 import os
-from functools import singledispatchmethod
 from typing import MutableMapping, Self
 
 import pandas as pd
@@ -16,9 +15,10 @@ class Specs:
         self.__instructions: MutableMapping = instructions
 
         name, extension = os.path.splitext(os.path.basename(path))
-        self.__specs["extension"] = self.__extension = extension
         self.__raw_name = name
         self.__name = name
+        self.__specs["extension"] = self.__extension = extension
+        self.__specs["file_name"] = self.__name
 
         if self.__extension == ".csv":
             self.__data = pd.read_csv(path)
