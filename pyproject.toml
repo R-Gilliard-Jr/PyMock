@@ -22,5 +22,8 @@ build-backend = "setuptools.build_meta"
 [project.urls]
 Homepage = "https://github.com/HHS/ACF-pir-data"
 
+[project.scripts]
+pymock-init = "py_mock.cli.initialize:setup"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
