@@ -46,5 +46,9 @@ def setup() -> None:
         json.dump(path_dict, f, indent=4)
 
 
+def main():
+    print("Executing main")
+
+
 if __name__ == "__main__":
     setup()
