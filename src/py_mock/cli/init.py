@@ -4,7 +4,7 @@ import re
 import sys
 
 
-def setup() -> None:
+def main() -> None:
     if sys.prefix != sys.base_prefix:
         recommended = os.path.dirname(sys.prefix)
 
@@ -44,11 +44,3 @@ def setup() -> None:
 
     with open(paths_file, "w") as f:
         json.dump(path_dict, f, indent=4)
-
-
-def main():
-    print("Executing main")
-
-
-if __name__ == "__main__":
-    setup()
