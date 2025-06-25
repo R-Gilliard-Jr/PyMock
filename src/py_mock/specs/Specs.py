@@ -28,6 +28,8 @@ class Specs:
         elif self.__extension in [".xls", ".xlsx"]:
             self.__data = pd.ExcelFile(path, engine="openpyxl")
 
+        self.get_specs_path()
+
     def get_specs_path(self):
         current_dir = os.path.dirname(__file__)
         config_dir = os.path.join(current_dir, "..", "config")

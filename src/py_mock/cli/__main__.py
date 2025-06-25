@@ -14,6 +14,10 @@ def parse_args() -> argparse.Namespace:
         "pymock", description="Command line facilities for mocking tabular data."
     )
     parser.add_argument("command", type=str, help="PyMock command to be run.")
+    parser.add_argument("-f", "--file", type=str, help="File to create specs for.")
+    parser.add_argument(
+        "-i", "--instructions", type=str, help="Instructions for specs command."
+    )
 
     return parser.parse_args(sys.argv[1:])
 
@@ -24,5 +28,5 @@ def main():
 
 
 if __name__ == "__main__":
-    sys.argv = ["pymock", "init"]
+    sys.argv = ["pymock", "specs", "-i", "{'id': ['some_column']}"]
     main()
