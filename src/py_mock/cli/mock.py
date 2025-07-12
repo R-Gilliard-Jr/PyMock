@@ -1,5 +1,5 @@
 from py_mock.cli.__main__ import parse_args
-from py_mock.specs.Specs import Specs
+from py_mock.mocking.MockData import MockData
 
 
 def main() -> None:
@@ -9,14 +9,14 @@ def main() -> None:
     except AssertionError:
         raise ValueError("File argument (-f, --file) is required with command specs.")
 
-    path = parser.file
-    instructions = parser.instructions
+    specs = parser.file
+    path = parser.out_directory
 
-    Specs(path, instructions).extract_column_metadata().export()
+    MockData(specs).generate_data.export(path)
 
 
 if __name__ == "__main__":
     import sys
 
-    sys.argv = ["pymock", "specs", "-f", "some_file"]
+    sys.argv = ["pymock", "mock", "-f", "some_specs", "-o", "some_dir"]
     main()
