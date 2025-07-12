@@ -1,5 +1,6 @@
 import json
 import os
+from functools import singledispatchmethod
 from typing import MutableMapping, Self
 
 import pandas as pd
@@ -45,7 +46,14 @@ class Specs:
 
         return cls
 
-    def metadata_extractor(self, data: pd.DataFrame, name: str) -> Self:
+    @singledispatchmethod
+    def metadata_extractor(self, data: pd.DataFrame | pd.ExcelFile, name: str) -> Self:
+        raise TypeError(
+            f"Invalid type {type(data)}. Expected pd.DataFrame or pd.ExcelFile"
+        )
+
+    @metadata_extractor.register
+    def _(self, data: pd.DataFrame, name: str) -> Self:
         def range_(series: pd.Series):
             type_ = series.dtype
             if type_ in [float, int]:
@@ -68,12 +76,14 @@ class Specs:
 
         return self
 
+    @metadata_extractor.register
+    def _(self, data: pd.ExcelFile, name: str) -> Self:
+        return self
+
     def extract_column_metadata(self) -> Self:
         if self.__extension == ".csv":
-            self.__data: pd.DataFrame
             self.metadata_extractor(self.__data, self.__name)
         elif self.__extension in [".xls", ".xlsx"]:
-            self.__data: pd.ExcelFile
             for sheet in self.__data.sheet_names:
                 data = pd.read_excel(self.__data, sheet_name=sheet)
                 self.metadata_extractor(data, sheet)

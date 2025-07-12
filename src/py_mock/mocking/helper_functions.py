@@ -2,6 +2,7 @@ import random
 import uuid
 from functools import partial, singledispatch
 from string import ascii_letters
+from typing import Any
 
 import numpy as np
 from numpy import dtypes
@@ -24,6 +25,8 @@ def _(type_: str | np.object_ | dtypes.ObjectDType):
 
 
 def get_value_func(type_: str, range_: list):
+    func: partial[Any]
+
     if type_.startswith("int"):
         func = partial(random.randint, *range_)
     elif type_.startswith("float"):
