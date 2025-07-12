@@ -4,10 +4,6 @@ import sys
 
 from py_mock import cli
 
-CLI_MODULES = {
-    name: module for name, module in inspect.getmembers(cli, inspect.ismodule)
-}
-
 
 def parse_args() -> argparse.Namespace:
     parser = argparse.ArgumentParser(
@@ -26,6 +22,9 @@ def parse_args() -> argparse.Namespace:
 
 
 def main():
+    CLI_MODULES = {
+        name: module for name, module in inspect.getmembers(cli, inspect.ismodule)
+    }
     parser = parse_args()
     CLI_MODULES[parser.command].main()
 
