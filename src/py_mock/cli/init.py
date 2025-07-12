@@ -27,12 +27,12 @@ def main() -> None:
         if add_to_gitignore:
             gitignore = os.path.join(specs_parent, ".gitignore")
             with open(gitignore, "a") as f:
-                f.write("\n")
-                f.write("""# PyMock\n.pymock\n""")
+                f.write("\n\n")
+                f.write("""# PyMock\n.pymock/\n""")
 
     current_dir = os.path.dirname(__file__)
-    py_mock_specs_dir = os.path.join(current_dir, "..", "config")
-    paths_file = os.path.join(py_mock_specs_dir, "paths.json")
+    config_dir = os.path.join(current_dir, "..", "config")
+    paths_file = os.path.join(config_dir, "paths.json")
     specs_path_dict = {"specs_path": specs_dir}
 
     if os.path.exists(paths_file):
