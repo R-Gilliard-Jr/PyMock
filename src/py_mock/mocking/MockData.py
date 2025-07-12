@@ -58,6 +58,6 @@ class MockData:
         out_path = os.path.join(path, f"{self.__file_name}{self.__extension}")
 
         if self.__extension == ".csv":
-            self.__data_frames.get(self.__file_name).to_csv(out_path)
+            self.__data_frames.get(self.__file_name).to_csv(out_path, index=False)
         elif self.__extension in [".xls", ".xlsx"]:
             pass
