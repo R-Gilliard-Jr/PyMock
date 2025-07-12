@@ -1,7 +1,7 @@
-py\_mock.specs
-==============
+py\_mock.utilities
+==================
 
-.. automodule:: py_mock.specs
+.. automodule:: py_mock.utilities
 
    
 .. rubric:: Modules
@@ -11,4 +11,4 @@ py\_mock.specs
    :template: custom-module-template.rst
    :recursive:
 
-   Specs
+   string_utilities

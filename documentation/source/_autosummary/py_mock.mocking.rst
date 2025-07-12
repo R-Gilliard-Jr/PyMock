@@ -1,7 +1,7 @@
-py\_mock.specs
-==============
+py\_mock.mocking
+================
 
-.. automodule:: py_mock.specs
+.. automodule:: py_mock.mocking
 
    
 .. rubric:: Modules
@@ -11,4 +11,5 @@ py\_mock.specs
    :template: custom-module-template.rst
    :recursive:
 
-   Specs
+   MockData
+   helper_functions
