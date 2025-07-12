@@ -12,8 +12,11 @@ classifiers = [
     "Operating System :: Microsoft :: Windows"
 ]
 dependencies = [
-    "sphinx", "pandas", "python-dotenv", "pytest", "openpyxl", "mypy"
+    "pandas", "openpyxl",
 ]
+
+[project.optional-dependencies]
+development = ["sphinx", "pytest", "mypy", "tox", "pandas-stubs"]
 
 [build-system]
 requires = ["setuptools>=61.0"]
@@ -22,5 +25,22 @@ build-backend = "setuptools.build_meta"
 [project.urls]
 Homepage = "https://github.com/HHS/ACF-pir-data"
 
+[project.scripts]
+pymock = "py_mock.cli.__main__:main"
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
+
+[tool.tox]
+requires = ["tox>=4.27"]
+env_list = ["type", "tests"]
+
+[tool.tox.env.type]
+description = "Run type checks"
+deps = ["mypy", "pandas-stubs"]
+commands = [["mypy", "src/py_mock"]]
+
+[tool.tox.env.tests]
+description = "Run tests"
+deps = ["pytest"]
+commands = [["pytest", "tests"]]

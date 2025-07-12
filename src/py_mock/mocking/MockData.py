@@ -12,14 +12,14 @@ class MockData:
     def __init__(self, specs: dict):
         self.__specs = specs
         self.__extension = specs.get("extension")
-        self.__file_name = specs.get("file_name")
-        self.__data_frames: dict = {}
+        self.__file_name: str = specs.get("file_name", "")
+        self.__data_frames: dict[str, pd.DataFrame] = {}
 
     def generate_rows(self, name: str, metadata: dict[str, dict]):
         def get_funcs(details: dict):
             id_ = details.get("id_")
-            range_ = details.get("range_")
-            type_ = details.get("type_")
+            range_: list = details.get("range_", [])
+            type_: str = details.get("type_", "")
 
             if id_:
                 func = get_id_func(np.dtype(type_))
@@ -58,6 +58,8 @@ class MockData:
         out_path = os.path.join(path, f"{self.__file_name}{self.__extension}")
 
         if self.__extension == ".csv":
-            self.__data_frames.get(self.__file_name).to_csv(out_path)
+            self.__data_frames.get(self.__file_name, pd.DataFrame()).to_csv(
+                out_path, index=False
+            )
         elif self.__extension in [".xls", ".xlsx"]:
             pass

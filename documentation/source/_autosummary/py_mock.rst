@@ -11,4 +11,8 @@
    :template: custom-module-template.rst
    :recursive:
 
+   cli
+   config
+   mocking
    specs
+   utilities
